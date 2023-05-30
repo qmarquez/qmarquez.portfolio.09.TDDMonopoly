@@ -1,7 +1,7 @@
 import { Monopoly } from "./monopoly";
 
 describe('Monopoly', () => {
-  let game;
+  let game: Monopoly;
   beforeEach(() => {
     game = new Monopoly();
   })
@@ -16,5 +16,9 @@ describe('Monopoly', () => {
 
   test('game instance should have a default initial amount of money for each player', () => {
     expect(game.initialMoneyAmount).toBe(1500);
+  });
+
+  test('game should know if has started or not', () => {
+    expect(game.hasStarted).toBeFalsy();
   });
 });
