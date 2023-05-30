@@ -28,4 +28,9 @@ describe('Player', () => {
   test('player instance should have monopoly default initial amount of money', () => {
     expect(player.money).toBe(Monopoly.initialMoneyAmount);
   });
+
+  test('player could set initial amount of money from config property', () => {
+    const player = new Player('name', { money: 1000 });
+    expect(player.money).toBe(1000);
+  });
 });

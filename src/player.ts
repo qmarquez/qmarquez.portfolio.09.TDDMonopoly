@@ -3,6 +3,7 @@ import { Monopoly } from "./monopoly";
 
 interface PlayerConfig {
   isBank: boolean;
+  money: number;
 }
 
 export class Player {
@@ -14,6 +15,6 @@ export class Player {
     config?: Partial<PlayerConfig>
   ) {
     this.isBank = get(config, 'isBank', false);
-    this.money = Monopoly.initialMoneyAmount;
+    this.money = get(config, 'money', Monopoly.initialMoneyAmount);
   }
 }
