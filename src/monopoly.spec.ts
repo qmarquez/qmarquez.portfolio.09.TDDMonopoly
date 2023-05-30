@@ -14,8 +14,8 @@ describe('Monopoly', () => {
     expect(game.bank).toBeDefined();
   });
 
-  test('game instance should have a default initial amount of money for each player', () => {
-    expect(game.initialMoneyAmount).toBe(1500);
+  test('Monopoly must have a default initial amount of money for each player', () => {
+    expect(Monopoly.initialMoneyAmount).toBe(1500);
   });
 
   test('game should know if has started or not', () => {
