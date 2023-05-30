@@ -9,4 +9,8 @@ describe('Monopoly', () => {
   test('game instance should be created', () => {
     expect(game).toBeInstanceOf(Monopoly);
   });
+
+  test('game instance should have a bank', () => {
+    expect(game.bank).toBeDefined();
+  });
 });
