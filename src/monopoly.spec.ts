@@ -1,4 +1,5 @@
 import { Monopoly } from "./monopoly";
+import { Player } from "./player";
 
 describe('Monopoly', () => {
   let game: Monopoly;
@@ -23,7 +24,12 @@ describe('Monopoly', () => {
   });
 
   test('game should start when a player is added', () => {
-    game.addPlayer();
+    game.addPlayer('a name');
     expect(game.hasStarted).toBeTruthy();
+  });
+
+  test('game could add a player and let it accessible', () => { 
+    game.addPlayer('name');
+    expect(game.players['name']).toBeInstanceOf(Player)
   });
 });
