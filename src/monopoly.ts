@@ -6,12 +6,20 @@ export class Monopoly {
   public hasStarted = false;
   public players: { [key: string]: Player } = {};
 
+  static NameAlreadyTakenError = class extends Error {
+    constructor(name: string) {
+      super(`${name} is already taken`);
+    }
+  }
+
   addPlayer(name: string) {
+    if (this.players[name]) {
+      throw new Monopoly.NameAlreadyTakenError(name);
+    }
+
     this.players[name] = new Player(
       name,
-      {
-        isBank: !this.hasStarted,
-      }
+      { isBank: !this.hasStarted, }
     );
     this.hasStarted = true;
   }

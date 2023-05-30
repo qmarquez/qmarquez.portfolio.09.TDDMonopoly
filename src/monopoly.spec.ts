@@ -37,4 +37,9 @@ describe('Monopoly', () => {
     game.addPlayer('name');
     expect(game.players['name'].isBank).toBeTruthy();
   });
+
+  test('if the name choosed for the player has been already taken, should throw an error', () => {
+    game.addPlayer('name');
+    expect(() => game.addPlayer('name')).toThrow(Monopoly.NameAlreadyTakenError);
+  });
 });
