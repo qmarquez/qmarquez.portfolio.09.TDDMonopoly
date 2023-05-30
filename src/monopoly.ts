@@ -25,5 +25,6 @@ export class Monopoly {
       { isBank: !this.hasStarted, }
     );
     this.hasStarted = true;
+    return this.players[name];
   }
 }

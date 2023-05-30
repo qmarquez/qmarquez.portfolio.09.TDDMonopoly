@@ -48,4 +48,9 @@ describe('Monopoly', () => {
     game.addPlayer('name2');
     expect(game.playersNames).toEqual(['name', 'name2']);
   });
+
+  test('the game should return the created player on the addition', () => {
+    const player = game.addPlayer('name');
+    expect(player).toEqual(game.players['name']);
+  });
 });
