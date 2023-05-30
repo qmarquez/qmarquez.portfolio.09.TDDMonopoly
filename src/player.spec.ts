@@ -14,4 +14,8 @@ describe('Player', () => {
   test('player instance should have a name', () => {
     expect(player.name).toBe('name');
   });
+
+  test('player instance should have default banker value', () => {
+    expect(player.isBank).toBeFalsy();
+  });
 });
