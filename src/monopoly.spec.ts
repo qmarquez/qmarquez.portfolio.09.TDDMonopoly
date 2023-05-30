@@ -21,4 +21,9 @@ describe('Monopoly', () => {
   test('game should know if has started or not', () => {
     expect(game.hasStarted).toBeFalsy();
   });
+
+  test('game should start when a player is added', () => {
+    game.addPlayer();
+    expect(game.hasStarted).toBeTruthy();
+  });
 });
