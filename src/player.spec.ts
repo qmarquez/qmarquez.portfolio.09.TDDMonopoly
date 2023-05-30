@@ -1,3 +1,4 @@
+import { Monopoly } from "./monopoly";
 import { Player } from "./player";
 
 describe('Player', () => {
@@ -19,8 +20,12 @@ describe('Player', () => {
     expect(player.isBank).toBeFalsy();
   });
 
-  test('player coual be setted as banker from config property', () => {
+  test('player could be setted as banker from config property', () => {
     const player = new Player('name', { isBank: true });
     expect(player.isBank).toBeTruthy();
+  });
+
+  test('player instance should have monopoly default initial amount of money', () => {
+    expect(player.money).toBe(Monopoly.initialMoneyAmount);
   });
 });
