@@ -28,8 +28,13 @@ describe('Monopoly', () => {
     expect(game.hasStarted).toBeTruthy();
   });
 
-  test('game could add a player and let it accessible', () => { 
+  test('game could add a player and let it accessible', () => {
     game.addPlayer('name');
     expect(game.players['name']).toBeInstanceOf(Player)
+  });
+
+  test('if the player added it\'s the first should be setted as banker', () => {
+    game.addPlayer('name');
+    expect(game.players['name'].isBank).toBeTruthy();
   });
 });

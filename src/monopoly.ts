@@ -7,7 +7,12 @@ export class Monopoly {
   public players: { [key: string]: Player } = {};
 
   addPlayer(name: string) {
+    this.players[name] = new Player(
+      name,
+      {
+        isBank: !this.hasStarted,
+      }
+    );
     this.hasStarted = true;
-    this.players[name] = new Player(name);
   }
 }
