@@ -1,13 +1,16 @@
+import { find } from "lodash";
 import { Player } from "./player";
 
 export class Monopoly {
-  static initialMoneyAmount = 1500;
-  static NameAlreadyTakenError = class extends Error {
+  public static initialMoneyAmount = 1500;
+  public static NameAlreadyTakenError = class extends Error {
     constructor(name: string) {
       super(`${name} is already taken`);
     }
   }
-  public bank = {};
+  public get bank() {
+    return find(this.players, { isBank: true });
+  };
   public hasStarted = false;
   public players: { [key: string]: Player } = {};
   public get playersNames() {
@@ -15,7 +18,7 @@ export class Monopoly {
       .map(key => this.players[key].name);
   }
 
-  addPlayer(name: string) {
+  public addPlayer(name: string) {
     if (this.players[name]) {
       throw new Monopoly.NameAlreadyTakenError(name);
     }

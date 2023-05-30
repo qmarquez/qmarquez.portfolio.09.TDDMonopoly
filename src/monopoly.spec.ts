@@ -11,8 +11,8 @@ describe('Monopoly', () => {
     expect(game).toBeInstanceOf(Monopoly);
   });
 
-  test('game instance should have a bank', () => {
-    expect(game.bank).toBeDefined();
+  test('game instance should haven\'t a bank if any player has added', () => {
+    expect(game.bank).toBeUndefined();
   });
 
   test('Monopoly must have a default initial amount of money for each player', () => {
@@ -53,4 +53,10 @@ describe('Monopoly', () => {
     const player = game.addPlayer('name');
     expect(player).toEqual(game.players['name']);
   });
+
+  test('the game should know who is the banker', () => {
+    game.addPlayer('name');
+    game.addPlayer('name2');
+    expect(game.bank).toEqual(game.players['name']);
+  })
 });
