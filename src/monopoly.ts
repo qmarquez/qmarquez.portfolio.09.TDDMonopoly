@@ -1,15 +1,18 @@
 import { Player } from "./player";
 
 export class Monopoly {
-  public static initialMoneyAmount = 1500;
-  public bank = {};
-  public hasStarted = false;
-  public players: { [key: string]: Player } = {};
-
+  static initialMoneyAmount = 1500;
   static NameAlreadyTakenError = class extends Error {
     constructor(name: string) {
       super(`${name} is already taken`);
     }
+  }
+  public bank = {};
+  public hasStarted = false;
+  public players: { [key: string]: Player } = {};
+  public get playersNames() {
+    return Object.keys(this.players)
+      .map(key => this.players[key].name);
   }
 
   addPlayer(name: string) {

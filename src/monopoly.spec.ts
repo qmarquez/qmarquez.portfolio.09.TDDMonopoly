@@ -42,4 +42,10 @@ describe('Monopoly', () => {
     game.addPlayer('name');
     expect(() => game.addPlayer('name')).toThrow(Monopoly.NameAlreadyTakenError);
   });
+
+  test('the game should return all the player\'s name', () => {
+    game.addPlayer('name');
+    game.addPlayer('name2');
+    expect(game.playersNames).toEqual(['name', 'name2']);
+  });
 });
