@@ -18,4 +18,9 @@ describe('Player', () => {
   test('player instance should have default banker value', () => {
     expect(player.isBank).toBeFalsy();
   });
+
+  test('player coual be setted as banker from config property', () => {
+    const player = new Player('name', { isBank: true });
+    expect(player.isBank).toBeTruthy();
+  });
 });
