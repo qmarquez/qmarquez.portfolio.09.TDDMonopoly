@@ -87,4 +87,9 @@ describe('Monopoly', () => {
     game.addPlayer('name', 4);
     expect(() => game.secureUpdateOrder(game.players['name'], { newOrder: 4 })).toThrow(Monopoly.OrderAlreadyTakenError);
   });
+
+  test('the game should not thrown an error in case the selected order collide and inCaseOfCollition was provided', () => {
+    game.addPlayer('name', 4);
+    expect(() => game.secureUpdateOrder(game.players['name'], { newOrder: 4, inCaseOfCollition: 'some' })).not.toThrow();
+  });
 });

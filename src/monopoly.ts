@@ -47,8 +47,8 @@ export class Monopoly {
     return this.players[name];
   }
 
-  public secureUpdateOrder(player: Player, data: { newOrder: number }) {
-    if (find(this.players, { order: data.newOrder })) {
+  public secureUpdateOrder(player: Player, data: { newOrder: number, inCaseOfCollition?: string}) {
+    if (find(this.players, { order: data.newOrder }) && !data.inCaseOfCollition) {
       throw new Monopoly.OrderAlreadyTakenError(data.newOrder);
     }
   }
