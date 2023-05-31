@@ -91,4 +91,9 @@ describe('Player', () => {
     player.collect(500, { asBank: true });
     expect(player.money).toBe(1000);
   });
+
+  test('if paymet is setted asBank but the player is not the bank, should throw', () => {
+    const player = new Player('name', { money: 1000 });
+    expect(() => player.collect(500, { asBank: true })).toThrow(Player.PaymenAsBankNotAllowedError);
+  });
 });

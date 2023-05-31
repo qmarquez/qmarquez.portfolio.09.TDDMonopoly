@@ -44,5 +44,7 @@ export class Player {
   public collect(amount: number, { asBank } = { asBank: false }) {
     if (!asBank)
       this._money += amount;
+    else if (!this.isBank)
+      throw new Player.PaymenAsBankNotAllowedError(this.name);
   }
 }
