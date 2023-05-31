@@ -30,4 +30,8 @@ describe('Actions', () => {
     expect(from.money).toBe(900);
     expect(to.money).toBe(1100);
   });
+
+  test('revert a non executed action should throw', () => {
+    expect(() => action.revert()).toThrow(PaymentAction.ActionNotExecutedError);
+  });
 })
