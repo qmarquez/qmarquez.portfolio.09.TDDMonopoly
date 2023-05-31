@@ -24,4 +24,8 @@ export class Player {
   public toString() {
     return `${this.isBank ? 'Bank' : 'Player'} (${this.name})`;
   }
+
+  public pay(amount: number) {
+    this.money -= amount;
+  }
 }

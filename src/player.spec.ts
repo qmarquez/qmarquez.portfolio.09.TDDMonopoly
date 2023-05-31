@@ -56,4 +56,10 @@ describe('Player', () => {
     const player = new Player('name', { isBank: true });
     expect(player.toString()).toBe('Bank (name)');
   });
+
+  test('player should be able to pay', () => {
+    const player = new Player('name', { money: 1000 });
+    player.pay(500);
+    expect(player.money).toBe(500);
+  });
 });
