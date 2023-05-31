@@ -68,4 +68,10 @@ describe('Player', () => {
     player.receive(500);
     expect(player.money).toBe(1500);
   });
+
+  test('player money shounld\'t be able to modify from outside', () => {
+    const player = new Player('name', { money: 1000 });
+    player.money = 500;
+    expect(player.money).toBe(1000);
+  });
 });

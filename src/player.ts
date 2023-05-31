@@ -9,7 +9,11 @@ interface PlayerConfig {
 
 export class Player {
   public isBank: boolean;
-  public money: number;
+  private _money: number;
+  public get money(){
+    return this._money;
+  };
+  public set money(_: number) {}
   public order: number = 0;
 
   constructor(
@@ -17,7 +21,7 @@ export class Player {
     config?: Partial<PlayerConfig>
   ) {
     this.isBank = get(config, 'isBank', false);
-    this.money = get(config, 'money', Monopoly.initialMoneyAmount);
+    this._money = get(config, 'money', Monopoly.initialMoneyAmount);
     this.order = get(config, 'order', 0);
   }
 
@@ -26,10 +30,10 @@ export class Player {
   }
 
   public pay(amount: number) {
-    this.money -= amount;
+    this._money -= amount;
   }
 
   public receive(amount: number) {
-    this.money += amount;
+    this._money += amount;
   }
 }
