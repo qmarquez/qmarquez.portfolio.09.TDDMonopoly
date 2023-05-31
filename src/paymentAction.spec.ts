@@ -16,4 +16,8 @@ describe('Actions', () => {
   test('action should allow to execute', () => {
     expect(action.exe).toBeDefined();
   });
+
+  test('action should allow to revert execution', () => {
+    expect(action.revert).toBeDefined();
+  });
 })
