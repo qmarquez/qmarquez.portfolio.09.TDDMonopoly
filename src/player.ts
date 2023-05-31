@@ -28,4 +28,8 @@ export class Player {
   public pay(amount: number) {
     this.money -= amount;
   }
+
+  public receive(amount: number) {
+    this.money += amount;
+  }
 }

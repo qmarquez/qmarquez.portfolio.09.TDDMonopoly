@@ -62,4 +62,10 @@ describe('Player', () => {
     player.pay(500);
     expect(player.money).toBe(500);
   });
+
+  test ('player should be able to receive money',()=>{
+    const player = new Player('name', { money: 1000 });
+    player.receive(500);
+    expect(player.money).toBe(1500);
+  });
 });
