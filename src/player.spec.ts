@@ -63,9 +63,9 @@ describe('Player', () => {
     expect(player.money).toBe(500);
   });
 
-  test('player should be able to receive money', () => {
+  test('player should be able to collect money', () => {
     const player = new Player('name', { money: 1000 });
-    player.receive(500);
+    player.collect(500);
     expect(player.money).toBe(1500);
   });
 
@@ -84,5 +84,11 @@ describe('Player', () => {
   test('if paymet is setted asBank but the player is not the bank, should throw', () => {
     const player = new Player('name', { money: 1000 });
     expect(() => player.pay(500, { asBank: true })).toThrow(Player.PaymenAsBankNotAllowedError);
+  });
+
+  test('if collectment is setted as a bank, the player shouldn\'t receive the money', () => {
+    const player = new Player('name', { money: 1000, isBank: true });
+    player.collect(500, { asBank: true });
+    expect(player.money).toBe(1000);
   });
 });

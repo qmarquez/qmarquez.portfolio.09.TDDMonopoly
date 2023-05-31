@@ -41,7 +41,8 @@ export class Player {
       throw new Player.PaymenAsBankNotAllowedError(this.name);
   }
 
-  public receive(amount: number) {
-    this._money += amount;
+  public collect(amount: number, { asBank } = { asBank: false }) {
+    if (!asBank)
+      this._money += amount;
   }
 }
