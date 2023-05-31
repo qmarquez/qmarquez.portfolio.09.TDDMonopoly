@@ -97,11 +97,7 @@ describe('Player', () => {
     expect(() => player.collect(500, { asBank: true })).toThrow(Player.PaymenAsBankNotAllowedError);
   });
 
-  test('player should have an aprove bank transaction method', () => {
-    expect(player.aproveBankTransaction).toBeDefined();
-  });
-
-  test('if player is not the bank and want to aprove bank transaction, should throw', () => {
-    expect(() => player.aproveBankTransaction()).toThrow(Player.PaymenAsBankNotAllowedError);
+  test('player should have an aprove transaction method', () => {
+    expect(player.aproveTransaction).toBeDefined();
   });
 });

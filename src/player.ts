@@ -53,8 +53,6 @@ export class Player {
       throw new Player.PaymenAsBankNotAllowedError(this.name);
   }
 
-  public aproveBankTransaction() {
-    if (!this.isBank)
-      throw new Player.PaymenAsBankNotAllowedError(this.name);
+  public aproveTransaction() {
   }
 }
