@@ -148,5 +148,9 @@ describe('Monopoly', () => {
       const player = game.addPlayer('name', { money: 1000 });
       expect(player.money).toBe(1000);
     });
-  })
+  });
+
+  test('game should allow to pay', () => {
+    expect(game.pay).toBeDefined();
+  });
 });
