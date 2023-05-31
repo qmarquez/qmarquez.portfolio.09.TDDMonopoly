@@ -67,5 +67,9 @@ export class Monopoly {
       player.order = newOrder;
     }
   }
+
+  public nextPlayer(){
+    return find(this.players, { order: 1 });
+  }
 }
 

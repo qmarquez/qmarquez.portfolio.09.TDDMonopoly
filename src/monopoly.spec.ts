@@ -112,4 +112,10 @@ describe('Monopoly', () => {
     expect(game.players['name'].order).toBe(5);
     expect(game.players['name2'].order).toBe(6);
   });
+
+  test('the game should know who is the next player to play',()=>{
+    game.addPlayer('name');
+    game.addPlayer('name2');
+    expect(game.nextPlayer()).toEqual(game.players['name']);
+  });
 });
