@@ -37,7 +37,7 @@ export class Monopoly {
   }
 
   public addPlayer(name: string, data: { order?: number, money?: number } = {}) {
-    const { order, money } = data
+    const { order } = data
     if (this.players[name]) {
       throw new Monopoly.NameAlreadyTakenError(name);
     }
@@ -88,6 +88,9 @@ export class Monopoly {
 
   public nextPlayer() {
     return find(this.players, { order: 1 });
+  }
+
+  public pay(from: Player, to: Player, amount: number) {
   }
 }
 
