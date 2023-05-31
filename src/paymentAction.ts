@@ -17,16 +17,19 @@ export class PaymentAction {
   constructor(
     private from: Player,
     private to: Player,
-    private amount: number,
-    private reason: string,
+    private data: {
+      amount: number,
+      reason: string,
+      fromBank?: boolean,
+    }
   ) { }
 
   public exe() {
     if (this.executed) {
       throw new PaymentAction.ActionAlreadyExecutedError();
     }
-    this.from.pay(this.amount);
-    this.to.collect(this.amount);
+    this.from.pay(this.data.amount, { asBank: !!this.data.fromBank });
+    this.to.collect(this.data.amount);
     this.executed = true;
   }
 
@@ -34,8 +37,8 @@ export class PaymentAction {
     if (!this.executed) {
       throw new PaymentAction.ActionNotExecutedError();
     }
-    this.from.collect(this.amount);
-    this.to.pay(this.amount);
+    this.from.collect(this.data.amount);
+    this.to.pay(this.data.amount);
     this.executed = false;
   }
 }
