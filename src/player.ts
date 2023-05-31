@@ -47,4 +47,7 @@ export class Player {
     else if (!this.isBank)
       throw new Player.PaymenAsBankNotAllowedError(this.name);
   }
+
+  public aproveBankTransaction() {
+  }
 }

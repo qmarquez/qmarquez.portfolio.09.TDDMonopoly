@@ -96,4 +96,8 @@ describe('Player', () => {
     const player = new Player('name', { money: 1000 });
     expect(() => player.collect(500, { asBank: true })).toThrow(Player.PaymenAsBankNotAllowedError);
   });
+
+  test('player should have an aprove bank transaction method', () => {
+    expect(player.aproveBankTransaction).toBeDefined();
+  });
 });
