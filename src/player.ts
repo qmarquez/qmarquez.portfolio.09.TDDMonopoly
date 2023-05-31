@@ -10,10 +10,10 @@ interface PlayerConfig {
 export class Player {
   public isBank: boolean;
   private _money: number;
-  public get money(){
+  public get money() {
     return this._money;
   };
-  public set money(_: number) {}
+  public set money(_: number) { }
   public order: number = 0;
 
   constructor(
@@ -29,8 +29,9 @@ export class Player {
     return `${this.isBank ? 'Bank' : 'Player'} (${this.name})`;
   }
 
-  public pay(amount: number) {
-    this._money -= amount;
+  public pay(amount: number, { asBank } = { asBank: false }) {
+    if (!asBank)
+      this._money -= amount;
   }
 
   public receive(amount: number) {

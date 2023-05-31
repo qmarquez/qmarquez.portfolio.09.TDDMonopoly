@@ -63,7 +63,7 @@ describe('Player', () => {
     expect(player.money).toBe(500);
   });
 
-  test ('player should be able to receive money',()=>{
+  test('player should be able to receive money', () => {
     const player = new Player('name', { money: 1000 });
     player.receive(500);
     expect(player.money).toBe(1500);
@@ -72,6 +72,12 @@ describe('Player', () => {
   test('player money shounld\'t be able to modify from outside', () => {
     const player = new Player('name', { money: 1000 });
     player.money = 500;
+    expect(player.money).toBe(1000);
+  });
+
+  test('if paymet is setted as a bank, the player shouldn\'t receive the money', () => {
+    const player = new Player('name', { money: 1000 });
+    player.pay(500, { asBank: true });
     expect(player.money).toBe(1000);
   });
 });
