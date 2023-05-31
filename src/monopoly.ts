@@ -36,14 +36,15 @@ export class Monopoly {
     }
   }
 
-  public addPlayer(name: string, order?: number) {
+  public addPlayer(name: string, data: { order?: number, money?: number } = {}) {
+    const { order, money } = data
     if (this.players[name]) {
       throw new Monopoly.NameAlreadyTakenError(name);
     }
     if (order && find(this.players, { order })) {
       throw new Monopoly.OrderAlreadyTakenError(order);
     }
-    this.createPlayer(name, order);
+    this.createPlayer(name, data);
     this.checklastOrdedAddedPointer();
     this.setHasStarted();
     return this.players[name];
@@ -55,16 +56,17 @@ export class Monopoly {
     }
   }
 
-  private createPlayer(name: string, order?: number) {
+  private createPlayer(name: string, { order, money }: { order?: number, money?: number }) {
     this.players[name] = new Player(
       name,
       {
         isBank: !this.hasStarted,
         order: order ? (this.lastOrderAdded = order) : ++this.lastOrderAdded,
+        money
       }
     );
   }
-  
+
   private checklastOrdedAddedPointer() {
     while (find(this.players, { order: this.lastOrderAdded + 1 })) {
       this.lastOrderAdded++;
