@@ -118,4 +118,19 @@ describe('Monopoly', () => {
     game.addPlayer('name2');
     expect(game.nextPlayer()).toEqual(game.players['name']);
   });
+
+  test('the last added order pointer should work on edge cases', ()=>{
+    game.addPlayer('name', 1);
+    game.addPlayer('name2');
+    game.addPlayer('name4', 4);
+    game.addPlayer('name5');
+    game.addPlayer('name3', 3);
+    game.addPlayer('name6');
+    expect(game.players['name'].order).toBe(1);
+    expect(game.players['name2'].order).toBe(2);
+    expect(game.players['name4'].order).toBe(4);
+    expect(game.players['name5'].order).toBe(5);
+    expect(game.players['name3'].order).toBe(3);
+    expect(game.players['name6'].order).toBe(6);
+  });
 });

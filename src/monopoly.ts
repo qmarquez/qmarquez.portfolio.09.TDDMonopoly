@@ -1,4 +1,4 @@
-import { find } from "lodash";
+import { find, last } from "lodash";
 import { Player } from "./player";
 import moment from "moment"
 
@@ -22,7 +22,7 @@ export class Monopoly {
   };
   public hasStarted: boolean | moment.Moment = false;
   public players: { [key: string]: Player } = {};
-  private nOfPlayers = 0;
+  private lastOrderAdded = 0;
   public get playersNames() {
     return Object.keys(this.players)
       .map(key => this.players[key].name);
@@ -48,9 +48,12 @@ export class Monopoly {
       name,
       {
         isBank: !this.hasStarted,
-        order: order || ++this.nOfPlayers,
+        order: order ? (this.lastOrderAdded = order) : ++this.lastOrderAdded,
       }
     );
+    while (find(this.players, { order: this.lastOrderAdded + 1 })) {
+      this.lastOrderAdded++;
+    }
     this.hasStarted = moment();
     return this.players[name];
   }
@@ -68,7 +71,7 @@ export class Monopoly {
     }
   }
 
-  public nextPlayer(){
+  public nextPlayer() {
     return find(this.players, { order: 1 });
   }
 }
