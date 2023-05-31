@@ -34,4 +34,14 @@ describe('Actions', () => {
   test('revert a non executed action should throw', () => {
     expect(() => action.revert()).toThrow(PaymentAction.ActionNotExecutedError);
   });
+
+  test('revert execution should pay and collect for players', () => {
+    const from = new Player('from', { money: 1000 });
+    const to = new Player('to', { money: 1000 });
+    const action = new PaymentAction(from, to, 100, 'reason');
+    action.exe();
+    action.revert();
+    expect(from.money).toBe(1000);
+    expect(to.money).toBe(1000);
+  });
 })

@@ -26,5 +26,8 @@ export class PaymentAction {
     if (!this.executed) {
       throw new PaymentAction.ActionNotExecutedError();
     }
+    this.from.collect(this.amount);
+    this.to.pay(this.amount);
+    this.executed = false;
   }
 }
