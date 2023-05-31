@@ -9,6 +9,7 @@ interface PlayerConfig {
 export class Player {
   public isBank: boolean;
   public money: number;
+  public order: number = 0;
 
   constructor(
     public name: string,

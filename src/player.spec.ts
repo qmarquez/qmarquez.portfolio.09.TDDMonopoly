@@ -33,4 +33,8 @@ describe('Player', () => {
     const player = new Player('name', { money: 1000 });
     expect(player.money).toBe(1000);
   });
+
+  test('player should have an order property, by default 0', () => {
+    expect(player.order).toBe(0);
+  });
 });
