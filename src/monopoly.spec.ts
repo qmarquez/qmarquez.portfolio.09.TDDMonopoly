@@ -72,4 +72,9 @@ describe('Monopoly', () => {
     expect(game.players['name'].order).toBe(1);
     expect(game.players['name2'].order).toBe(2);
   });
+
+  test('a player can be added in a particular order', () => {
+    game.addPlayer('name', 3);
+    expect(game.players['name'].order).toBe(3);
+  });
 });

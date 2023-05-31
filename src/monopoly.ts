@@ -20,19 +20,21 @@ export class Monopoly {
       .map(key => this.players[key].name);
   }
 
-  public addPlayer(name: string) {
+  public addPlayer(name: string, order?: number) {
     if (this.players[name]) {
       throw new Monopoly.NameAlreadyTakenError(name);
     }
 
     this.players[name] = new Player(
       name,
-      { 
+      {
         isBank: !this.hasStarted,
-        order: ++this.nOfPlayers,
+        order: order || ++this.nOfPlayers,
       }
     );
     this.hasStarted = moment();
     return this.players[name];
   }
+
+
 }
