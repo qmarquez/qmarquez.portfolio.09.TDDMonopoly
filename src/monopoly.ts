@@ -1,4 +1,4 @@
-import { find, last } from "lodash";
+import { find } from "lodash";
 import { Player } from "./player";
 import moment from "moment"
 
@@ -43,7 +43,19 @@ export class Monopoly {
     if (order && find(this.players, { order })) {
       throw new Monopoly.OrderAlreadyTakenError(order);
     }
+    this.createPlayer(name, order);
+    this.checklastOrdedAddedPointer();
+    this.setHasStarted();
+    return this.players[name];
+  }
 
+  private setHasStarted() {
+    if (!this.hasStarted) {
+      this.hasStarted = moment();
+    }
+  }
+
+  private createPlayer(name: string, order?: number) {
     this.players[name] = new Player(
       name,
       {
@@ -51,13 +63,12 @@ export class Monopoly {
         order: order ? (this.lastOrderAdded = order) : ++this.lastOrderAdded,
       }
     );
+  }
+  
+  private checklastOrdedAddedPointer() {
     while (find(this.players, { order: this.lastOrderAdded + 1 })) {
       this.lastOrderAdded++;
     }
-    if (!this.hasStarted) {
-      this.hasStarted = moment();
-    }
-    return this.players[name];
   }
 
   public secureUpdateOrder(player: Player, data: { newOrder: number, inCaseOfCollition?: 'insertAndPush' }) {
