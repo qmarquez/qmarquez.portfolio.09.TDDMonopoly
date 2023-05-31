@@ -81,8 +81,8 @@ describe('Monopoly', () => {
   test('if a player order is already taken, should throw an error', () => {
     game.addPlayer('name', 3);
     expect(() => game.addPlayer('name2', 3)).toThrow(Monopoly.OrderAlreadyTakenError);
-  });  
-  
+  });
+
   test('the game shouldn\'t do anything if the newOrder is the same than the current', () => {
     game.addPlayer('name', 4);
     expect(() => game.secureUpdateOrder(game.players['name'], { newOrder: 4 })).not.toThrow();
@@ -97,5 +97,11 @@ describe('Monopoly', () => {
   test('the game should not thrown an error in case the selected order collide and inCaseOfCollition was provided', () => {
     game.addPlayer('name', 4);
     expect(() => game.secureUpdateOrder(game.players['name'], { newOrder: 4, inCaseOfCollition: 'some' })).not.toThrow();
+  });
+
+  test('the game should allow to change the order for a player', () => {
+    game.addPlayer('name', 4);
+    game.secureUpdateOrder(game.players['name'], { newOrder: 5 });
+    expect(game.players['name'].order).toBe(5);
   });
 });

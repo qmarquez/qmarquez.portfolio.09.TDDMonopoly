@@ -31,7 +31,6 @@ export class Monopoly {
     if (this.players[name]) {
       throw new Monopoly.NameAlreadyTakenError(name);
     }
-
     if (order && find(this.players, { order })) {
       throw new Monopoly.OrderAlreadyTakenError(order);
     }
@@ -52,5 +51,6 @@ export class Monopoly {
     if (playerInOrder && player !== playerInOrder && !data.inCaseOfCollition) {
       throw new Monopoly.OrderAlreadyTakenError(data.newOrder);
     }
+    player.order = data.newOrder;
   }
 }
