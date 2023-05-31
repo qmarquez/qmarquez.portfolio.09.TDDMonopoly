@@ -8,6 +8,11 @@ interface PlayerConfig {
 }
 
 export class Player {
+  public static PaymenAsBankNotAllowedError = class extends Error {
+    constructor(name: string) {
+      super(`${name} is not a bank. Payment asBank to a non bank player is not allowed`);
+    }
+  }
   public isBank: boolean;
   private _money: number;
   public get money() {
@@ -32,6 +37,8 @@ export class Player {
   public pay(amount: number, { asBank } = { asBank: false }) {
     if (!asBank)
       this._money -= amount;
+    else if (!this.isBank)
+      throw new Player.PaymenAsBankNotAllowedError(this.name);
   }
 
   public receive(amount: number) {
