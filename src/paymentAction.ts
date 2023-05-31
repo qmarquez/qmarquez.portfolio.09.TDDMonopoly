@@ -21,6 +21,7 @@ export class PaymentAction {
       amount: number,
       reason: string,
       fromBank?: boolean,
+      toBank?: boolean,
     }
   ) { }
 
@@ -29,7 +30,7 @@ export class PaymentAction {
       throw new PaymentAction.ActionAlreadyExecutedError();
     }
     this.from.pay(this.data.amount, { asBank: !!this.data.fromBank });
-    this.to.collect(this.data.amount);
+    this.to.collect(this.data.amount, { asBank: !!this.data.toBank });
     this.executed = true;
   }
 

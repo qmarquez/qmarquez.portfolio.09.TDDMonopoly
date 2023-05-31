@@ -58,4 +58,13 @@ describe('Actions', () => {
     expect(from.money).toBe(1000);
     expect(to.money).toBe(1100);
   });
+
+  test('action should allow to set toBank, to player shouldn\'t decrese money', () => {
+    const from = new Player('from', { money: 1000 });
+    const to = new Player('to', { money: 1000, isBank: true });
+    const action = new PaymentAction(from, to, { amount: 100, reason: 'reason', toBank: true });
+    action.exe();
+    expect(from.money).toBe(900);
+    expect(to.money).toBe(1000);
+  });
 })
