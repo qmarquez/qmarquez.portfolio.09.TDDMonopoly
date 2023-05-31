@@ -14,6 +14,7 @@ export class Monopoly {
   };
   public hasStarted: boolean | moment.Moment = false;
   public players: { [key: string]: Player } = {};
+  private nOfPlayers = 0;
   public get playersNames() {
     return Object.keys(this.players)
       .map(key => this.players[key].name);
@@ -26,7 +27,10 @@ export class Monopoly {
 
     this.players[name] = new Player(
       name,
-      { isBank: !this.hasStarted, }
+      { 
+        isBank: !this.hasStarted,
+        order: ++this.nOfPlayers,
+      }
     );
     this.hasStarted = moment();
     return this.players[name];

@@ -65,4 +65,11 @@ describe('Monopoly', () => {
     game.addPlayer('name');
     expect(moment.isMoment(game.hasStarted)).toBeTruthy();
   });
+
+  test('players must have a sequential order when are added', () => {
+    game.addPlayer('name');
+    game.addPlayer('name2');
+    expect(game.players['name'].order).toBe(1);
+    expect(game.players['name2'].order).toBe(2);
+  });
 });
