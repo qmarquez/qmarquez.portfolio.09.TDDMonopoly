@@ -13,11 +13,6 @@ export class Player {
       super(`${name} is not a bank. Payment asBank to a non bank player is not allowed`);
     }
   }
-  public static AproveBankTransactionNotAllowedError = class extends Error {
-    constructor(name: string) {
-      super(`${name} is not a bank. Aprove bank transaction to a non bank player is not allowed`);
-    }
-  }
   public isBank: boolean;
   private _money: number;
   public get money() {

@@ -38,8 +38,8 @@ export class PaymentAction {
     if (!this.executed) {
       throw new PaymentAction.ActionNotExecutedError();
     }
-    this.from.collect(this.data.amount);
-    this.to.pay(this.data.amount);
+    this.from.collect(this.data.amount, { asBank: !!this.data.fromBank });
+    this.to.pay(this.data.amount, { asBank: !!this.data.toBank });
     this.executed = false;
   }
 }
