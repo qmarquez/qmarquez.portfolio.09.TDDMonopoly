@@ -4,6 +4,7 @@ import { Monopoly } from "./monopoly";
 interface PlayerConfig {
   isBank: boolean;
   money: number;
+  order: number;
 }
 
 export class Player {
@@ -17,5 +18,6 @@ export class Player {
   ) {
     this.isBank = get(config, 'isBank', false);
     this.money = get(config, 'money', Monopoly.initialMoneyAmount);
+    this.order = get(config, 'order', 0);
   }
 }

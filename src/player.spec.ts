@@ -37,4 +37,14 @@ describe('Player', () => {
   test('player should have an order property, by default 0', () => {
     expect(player.order).toBe(0);
   });
+
+  test('player order could be setted from config property', () => {
+    const player = new Player('name', { order: 1 });
+    expect(player.order).toBe(1);
+  });
+
+  test('player order could be updated', () => {
+    player.order = 1;
+    expect(player.order).toBe(1);
+  });
 });
