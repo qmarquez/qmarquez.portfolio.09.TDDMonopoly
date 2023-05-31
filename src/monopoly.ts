@@ -9,6 +9,13 @@ export class Monopoly {
       super(`${name} is already taken`);
     }
   }
+  public static OrderAlreadyTakenError = class extends Error {
+    constructor(
+      order: number
+    ) { 
+      super(`order ${order} is already taken`);
+    }
+  }
   public get bank() {
     return find(this.players, { isBank: true });
   };
@@ -23,6 +30,10 @@ export class Monopoly {
   public addPlayer(name: string, order?: number) {
     if (this.players[name]) {
       throw new Monopoly.NameAlreadyTakenError(name);
+    }
+
+    if (order && find(this.players, { order })) {
+      throw new Monopoly.OrderAlreadyTakenError(order);
     }
 
     this.players[name] = new Player(

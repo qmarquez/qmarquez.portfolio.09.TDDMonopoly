@@ -77,4 +77,9 @@ describe('Monopoly', () => {
     game.addPlayer('name', 3);
     expect(game.players['name'].order).toBe(3);
   });
+
+  test('if a player order is already taken, should throw an error', () => {
+    game.addPlayer('name', 3);
+    expect(() => game.addPlayer('name2', 3)).toThrow(Monopoly.OrderAlreadyTakenError);
+  });
 });
