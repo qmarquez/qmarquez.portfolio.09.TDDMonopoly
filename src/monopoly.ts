@@ -1,6 +1,7 @@
 import { find } from "lodash";
 import { Player } from "./player";
 import moment from "moment"
+import { PaymentAction } from "./paymentAction";
 
 export class Monopoly {
   public static initialMoneyAmount = 1500;
@@ -23,6 +24,7 @@ export class Monopoly {
   public hasStarted: boolean | moment.Moment = false;
   public players: { [key: string]: Player } = {};
   private lastOrderAdded = 0;
+  public actions: PaymentAction[] = []
   public get playersNames() {
     return Object.keys(this.players)
       .map(key => this.players[key].name);

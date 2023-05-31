@@ -153,4 +153,8 @@ describe('Monopoly', () => {
   test('game should allow to pay', () => {
     expect(game.pay).toBeDefined();
   });
+
+  test('game should have a history of actions', () => {
+    expect(game.actions).toBeDefined();
+  });
 });
