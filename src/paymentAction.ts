@@ -1,3 +1,4 @@
+import { Monopoly } from "./monopoly";
 import { Player } from "./player";
 
 export class PaymentAction {
@@ -9,10 +10,11 @@ export class PaymentAction {
   ) { }
 
   public exe() {
-
+    this.from.pay(this.amount);
+    this.to.collect(this.amount);
   }
 
   public revert() {
-    
+
   }
 }

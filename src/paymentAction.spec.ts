@@ -2,7 +2,8 @@ import { PaymentAction } from "./paymentAction";
 import { Player } from "./player";
 
 describe('Actions', () => {
-  let action: PaymentAction
+  let action: PaymentAction;
+
   beforeEach(() => {
     const from = new Player('from');
     const to = new Player('to');
@@ -19,5 +20,14 @@ describe('Actions', () => {
 
   test('action should allow to revert execution', () => {
     expect(action.revert).toBeDefined();
+  });
+
+  test('execution should pay and collect for players', () => {
+    const from = new Player('from', { money: 1000 });
+    const to = new Player('to', { money: 1000 });
+    const action = new PaymentAction(from, to, 100, 'reason');
+    action.exe();
+    expect(from.money).toBe(900);
+    expect(to.money).toBe(1100);
   });
 })
