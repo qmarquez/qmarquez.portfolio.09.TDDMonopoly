@@ -48,7 +48,12 @@ describe('Player', () => {
     expect(player.order).toBe(1);
   });
 
-  test('player toString method shlould return properly', ()=>{
+  test('player toString method shlould return properly', () => {
     expect(player.toString()).toBe('Player (name)');
+  });
+
+  test('player toString method shlould return properly with bank player', () => {
+    const player = new Player('name', { isBank: true });
+    expect(player.toString()).toBe('Bank (name)');
   });
 });

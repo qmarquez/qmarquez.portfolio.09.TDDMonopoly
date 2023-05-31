@@ -22,6 +22,6 @@ export class Player {
   }
 
   public toString() {
-    return `Player (${this.name})`;
+    return `${this.isBank ? 'Bank' : 'Player'} (${this.name})`;
   }
 }
