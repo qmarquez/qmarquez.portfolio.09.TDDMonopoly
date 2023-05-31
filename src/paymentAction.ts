@@ -2,9 +2,13 @@ import { Player } from "./player";
 
 export class PaymentAction {
   constructor(
-    public from: Player,
-    public to: Player,
-    public amount: number,
-    public reason: string,
+    private from: Player,
+    private to: Player,
+    private amount: number,
+    private reason: string,
   ) { }
+
+  public exe() {
+
+  }
 }
