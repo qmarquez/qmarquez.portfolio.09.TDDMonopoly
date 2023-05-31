@@ -1,6 +1,6 @@
 import { find } from "lodash";
 import { Player } from "./player";
-import moment from "moment";
+import moment from "moment"
 
 export class Monopoly {
   public static initialMoneyAmount = 1500;
@@ -12,7 +12,7 @@ export class Monopoly {
   public static OrderAlreadyTakenError = class extends Error {
     constructor(
       order: number
-    ) { 
+    ) {
       super(`order ${order} is already taken`);
     }
   }
@@ -47,5 +47,9 @@ export class Monopoly {
     return this.players[name];
   }
 
-
+  public secureUpdateOrder(player: Player, data: { newOrder: number }) {
+    if (find(this.players, { order: data.newOrder })) {
+      throw new Monopoly.OrderAlreadyTakenError(data.newOrder);
+    }
+  }
 }
