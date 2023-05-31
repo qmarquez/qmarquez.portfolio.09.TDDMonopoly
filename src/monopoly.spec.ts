@@ -1,3 +1,4 @@
+import moment from "moment";
 import { Monopoly } from "./monopoly";
 import { Player } from "./player";
 
@@ -58,5 +59,10 @@ describe('Monopoly', () => {
     game.addPlayer('name');
     game.addPlayer('name2');
     expect(game.bank).toEqual(game.players['name']);
-  })
+  });
+
+  test('when the game starts, hasStarted should turn into moment instance', () => {
+    game.addPlayer('name');
+    expect(moment.isMoment(game.hasStarted)).toBeTruthy();
+  });
 });

@@ -1,5 +1,6 @@
 import { find } from "lodash";
 import { Player } from "./player";
+import moment from "moment";
 
 export class Monopoly {
   public static initialMoneyAmount = 1500;
@@ -11,7 +12,7 @@ export class Monopoly {
   public get bank() {
     return find(this.players, { isBank: true });
   };
-  public hasStarted = false;
+  public hasStarted: boolean | moment.Moment = false;
   public players: { [key: string]: Player } = {};
   public get playersNames() {
     return Object.keys(this.players)
@@ -27,7 +28,7 @@ export class Monopoly {
       name,
       { isBank: !this.hasStarted, }
     );
-    this.hasStarted = true;
+    this.hasStarted = moment();
     return this.players[name];
   }
 }
