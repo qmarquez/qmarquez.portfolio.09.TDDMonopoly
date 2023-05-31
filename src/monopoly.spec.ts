@@ -96,12 +96,20 @@ describe('Monopoly', () => {
 
   test('the game should not thrown an error in case the selected order collide and inCaseOfCollition was provided', () => {
     game.addPlayer('name', 4);
-    expect(() => game.secureUpdateOrder(game.players['name'], { newOrder: 4, inCaseOfCollition: 'some' })).not.toThrow();
+    expect(() => game.secureUpdateOrder(game.players['name'], { newOrder: 4, inCaseOfCollition: 'insertAndPush' })).not.toThrow();
   });
 
   test('the game should allow to change the order for a player', () => {
     game.addPlayer('name', 4);
     game.secureUpdateOrder(game.players['name'], { newOrder: 5 });
     expect(game.players['name'].order).toBe(5);
+  });
+
+  test('the game should handle a collition: insert and push', () => {
+    game.addPlayer('name', 4);
+    game.addPlayer('name2', 5);
+    game.secureUpdateOrder(game.players['name'], { newOrder: 5, inCaseOfCollition: 'insertAndPush' });
+    expect(game.players['name'].order).toBe(5);
+    expect(game.players['name2'].order).toBe(6);
   });
 });

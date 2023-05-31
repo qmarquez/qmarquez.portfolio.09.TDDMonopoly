@@ -16,6 +16,7 @@ export class Monopoly {
       super(`order ${order} is already taken`);
     }
   }
+
   public get bank() {
     return find(this.players, { isBank: true });
   };
@@ -25,6 +26,14 @@ export class Monopoly {
   public get playersNames() {
     return Object.keys(this.players)
       .map(key => this.players[key].name);
+  }
+  private collitionsStrategies = {
+    insertAndPush: (player: Player, newOrder: number) => {
+      this.playersNames
+        .filter(name => this.players[name].order >= newOrder)
+        .forEach(name => this.players[name].order++);
+      player.order = newOrder;
+    }
   }
 
   public addPlayer(name: string, order?: number) {
@@ -46,11 +55,17 @@ export class Monopoly {
     return this.players[name];
   }
 
-  public secureUpdateOrder(player: Player, data: { newOrder: number, inCaseOfCollition?: string }) {
-    const playerInOrder = find(this.players, { order: data.newOrder });
-    if (playerInOrder && player !== playerInOrder && !data.inCaseOfCollition) {
-      throw new Monopoly.OrderAlreadyTakenError(data.newOrder);
+  public secureUpdateOrder(player: Player, data: { newOrder: number, inCaseOfCollition?: 'insertAndPush' }) {
+    const { newOrder, inCaseOfCollition } = data;
+    const playerInOrder = find(this.players, { order: newOrder });
+    if (playerInOrder && player !== playerInOrder) {
+      if (!inCaseOfCollition) {
+        throw new Monopoly.OrderAlreadyTakenError(newOrder);
+      }
+      this.collitionsStrategies[inCaseOfCollition](player, newOrder);
+    } else {
+      player.order = newOrder;
     }
-    player.order = data.newOrder;
   }
 }
+
