@@ -54,7 +54,9 @@ export class Monopoly {
     while (find(this.players, { order: this.lastOrderAdded + 1 })) {
       this.lastOrderAdded++;
     }
-    this.hasStarted = moment();
+    if (!this.hasStarted) {
+      this.hasStarted = moment();
+    }
     return this.players[name];
   }
 

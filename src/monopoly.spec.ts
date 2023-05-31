@@ -113,13 +113,13 @@ describe('Monopoly', () => {
     expect(game.players['name2'].order).toBe(6);
   });
 
-  test('the game should know who is the next player to play',()=>{
+  test('the game should know who is the next player to play', () => {
     game.addPlayer('name');
     game.addPlayer('name2');
     expect(game.nextPlayer()).toEqual(game.players['name']);
   });
 
-  test('the last added order pointer should work on edge cases', ()=>{
+  test('the last added order pointer should work on edge cases', () => {
     game.addPlayer('name', 1);
     game.addPlayer('name2');
     game.addPlayer('name4', 4);
@@ -132,5 +132,12 @@ describe('Monopoly', () => {
     expect(game.players['name5'].order).toBe(5);
     expect(game.players['name3'].order).toBe(3);
     expect(game.players['name6'].order).toBe(6);
+  });
+
+  test('hasStarted should only setted on first player adding', () => {
+    game.addPlayer('name');
+    const hasStarted = game.hasStarted;
+    game.addPlayer('name2');
+    expect(game.hasStarted).toBe(hasStarted);
   });
 });
