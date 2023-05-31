@@ -47,4 +47,8 @@ describe('Player', () => {
     player.order = 1;
     expect(player.order).toBe(1);
   });
+
+  test('player toString method shlould return properly', ()=>{
+    expect(player.toString()).toBe('Player (name)');
+  });
 });

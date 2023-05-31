@@ -20,4 +20,8 @@ export class Player {
     this.money = get(config, 'money', Monopoly.initialMoneyAmount);
     this.order = get(config, 'order', 0);
   }
+
+  public toString() {
+    return `Player (${this.name})`;
+  }
 }
