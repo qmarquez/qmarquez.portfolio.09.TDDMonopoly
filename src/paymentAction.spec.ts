@@ -44,4 +44,9 @@ describe('Actions', () => {
     expect(from.money).toBe(1000);
     expect(to.money).toBe(1000);
   });
+
+  test('execute an already executed action should throw', () => {
+    action.exe();
+    expect(() => action.exe()).toThrow(PaymentAction.ActionAlreadyExecutedError);
+  });
 })

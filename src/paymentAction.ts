@@ -6,6 +6,11 @@ export class PaymentAction {
       super(`Action not already executed`);
     }
   }
+  public static ActionAlreadyExecutedError = class extends Error {
+    constructor() {
+      super(`Action already executed`);
+    }
+  }
 
   private executed = false;
 
@@ -17,6 +22,9 @@ export class PaymentAction {
   ) { }
 
   public exe() {
+    if (this.executed) {
+      throw new PaymentAction.ActionAlreadyExecutedError();
+    }
     this.from.pay(this.amount);
     this.to.collect(this.amount);
     this.executed = true;
