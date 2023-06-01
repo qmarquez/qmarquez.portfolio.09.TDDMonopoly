@@ -87,4 +87,12 @@ describe('Actions', () => {
     expect(from.money).toBe(1000);
     expect(to.money).toBe(1000);
   });
+
+  test('action should allow to know from outside if was executed or not', () => {
+    expect(action.executed).toBeFalsy();
+    action.exe();
+    expect(action.executed).toBeTruthy();
+    action.revert();
+    expect(action.executed).toBeFalsy();
+  });
 })
