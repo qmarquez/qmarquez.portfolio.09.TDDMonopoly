@@ -101,7 +101,10 @@ export class Monopoly {
   }
 
   public nextTurn() {
-    this.currentOrder++;
+    if (this.currentOrder === this.lastOrderAdded)
+      this.currentOrder = 1;
+    else
+      this.currentOrder++;
   }
 
   public pay(from: Player, to: Player, data: { amount: number }) {

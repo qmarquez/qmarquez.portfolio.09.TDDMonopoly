@@ -117,6 +117,14 @@ describe('Monopoly', () => {
       game.nextTurn();
       expect(game.nextPlayer).toEqual(game.players['name2']);
     });
+
+    test('if the next player is the last, nextTurn should return to the first', () => {
+      game.addPlayer('name');
+      game.addPlayer('name2');
+      game.nextTurn();
+      game.nextTurn();
+      expect(game.nextPlayer).toEqual(game.players['name']);
+    });
   });
 
   test('hasStarted should only setted on first player adding', () => {
