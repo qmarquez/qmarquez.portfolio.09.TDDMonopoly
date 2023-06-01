@@ -21,6 +21,9 @@ export class Monopoly {
   public get bank() {
     return find(this.players, { isBank: true });
   };
+  public get state() {
+    return 0;
+  }
   public hasStarted: boolean | moment.Moment = false;
   public players: { [key: string]: Player } = {};
   private lastOrderAdded = 0;

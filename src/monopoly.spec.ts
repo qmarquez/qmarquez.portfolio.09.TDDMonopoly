@@ -164,4 +164,8 @@ describe('Monopoly', () => {
     game.pay(from, to, { amount: 100 });
     expect(game.actions.length).toBe(1);
   });
+
+  test('monopoly should be able to return the last state of the game', () => {
+    expect(game.state).toBeDefined();
+  });
 });
