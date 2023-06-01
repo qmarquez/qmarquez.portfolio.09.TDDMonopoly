@@ -111,6 +111,12 @@ describe('Monopoly', () => {
       expect(game.nextTurn).toBeDefined();
     });
 
+    test('when nextTurn is called, name2 should be the next player', () => {
+      game.addPlayer('name');
+      game.addPlayer('name2');
+      game.nextTurn();
+      expect(game.nextPlayer).toEqual(game.players['name2']);
+    });
   });
 
   test('hasStarted should only setted on first player adding', () => {

@@ -34,6 +34,7 @@ export class Monopoly {
   public hasStarted: boolean | moment.Moment = false;
   public players: { [key: string]: Player } = {};
   private lastOrderAdded = 0;
+  private currentOrder: number = 0;
   public actions: PaymentAction[] = [];
 
   public get playersNames() {
@@ -68,6 +69,7 @@ export class Monopoly {
 
   private setHasStarted() {
     if (!this.hasStarted) {
+      this.currentOrder = 1;
       this.hasStarted = moment();
     }
   }
@@ -95,11 +97,11 @@ export class Monopoly {
   }
 
   public get nextPlayer() {
-    return find(this.players, { order: 1 });
+    return find(this.players, { order: this.currentOrder });
   }
 
   public nextTurn() {
-    
+    this.currentOrder++;
   }
 
   public pay(from: Player, to: Player, data: { amount: number }) {
