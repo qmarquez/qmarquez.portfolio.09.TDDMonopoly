@@ -183,6 +183,11 @@ describe('Monopoly', () => {
       expect(game.state.players).toEqual([n, n2]);
       expect(n.money).toBe(1400);
       expect(n2.money).toBe(1600);
-    })
+    });
+
+    test('should have the next player to play', () => {
+      const n = game.addPlayer('name');
+      expect(game.state.nextPlayer).toEqual(n);
+    });
   });
 });

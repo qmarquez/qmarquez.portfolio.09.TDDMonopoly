@@ -27,7 +27,8 @@ export class Monopoly {
       .keys(this.players)
       .map(key => this.players[key]);
     return {
-      players
+      players,
+      nextPlayer: this.nextPlayer(),
     };
   }
   public hasStarted: boolean | moment.Moment = false;
