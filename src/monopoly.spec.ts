@@ -175,5 +175,14 @@ describe('Monopoly', () => {
       const n2 = game.addPlayer('name2');
       expect(game.state.players).toEqual([n, n2]);
     });
+
+    test('should have the last state', () => {
+      const n = game.addPlayer('name');
+      const n2 = game.addPlayer('name2');
+      game.pay(n, n2, { amount: 100 });
+      expect(game.state.players).toEqual([n, n2]);
+      expect(n.money).toBe(1400);
+      expect(n2.money).toBe(1600);
+    })
   });
 });

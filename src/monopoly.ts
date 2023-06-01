@@ -22,6 +22,9 @@ export class Monopoly {
     return find(this.players, { isBank: true });
   };
   public get state() {
+    this.actions
+      .filter(action => !action.executed)
+      .forEach(action => action.exe());
     const players = Object
       .keys(this.players)
       .map(key => this.players[key]);
