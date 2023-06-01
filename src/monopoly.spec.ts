@@ -117,7 +117,12 @@ describe('Monopoly', () => {
     test('the game should know who is the next player to play', () => {
       game.addPlayer('name');
       game.addPlayer('name2');
-      expect(game.nextPlayer()).toEqual(game.players['name']);
+      expect(game.nextPlayer).toEqual(game.players['name']);
+    });
+
+    test('should allow to finish the current player turn', () => {
+      expect(game.nextTurn).toBeDefined();
+    });
     });
 
     test('the last added order pointer should work on edge cases', () => {

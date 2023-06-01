@@ -28,7 +28,7 @@ export class Monopoly {
       .map(key => this.players[key]);
     return {
       players,
-      nextPlayer: this.nextPlayer(),
+      nextPlayer: this.nextPlayer,
     };
   }
   public hasStarted: boolean | moment.Moment = false;
@@ -99,8 +99,12 @@ export class Monopoly {
     }
   }
 
-  public nextPlayer() {
+  public get nextPlayer() {
     return find(this.players, { order: 1 });
+  }
+
+  public nextTurn() {
+    
   }
 
   public pay(from: Player, to: Player, data: { amount: number }) {
