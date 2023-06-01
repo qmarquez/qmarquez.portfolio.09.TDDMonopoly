@@ -157,4 +157,11 @@ describe('Monopoly', () => {
   test('game should have a history of actions', () => {
     expect(game.actions).toBeDefined();
   });
+
+  test('when a pay is made action should be added to the history', () => {
+    const from = game.addPlayer('from');
+    const to = game.addPlayer('to');
+    game.pay(from, to, { amount: 100 });
+    expect(game.actions.length).toBe(1);
+  });
 });

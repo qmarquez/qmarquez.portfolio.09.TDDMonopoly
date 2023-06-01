@@ -92,7 +92,9 @@ export class Monopoly {
     return find(this.players, { order: 1 });
   }
 
-  public pay(from: Player, to: Player, amount: number) {
+  public pay(from: Player, to: Player, data: { amount: number }) {
+    const action = new PaymentAction(from, to, { ...data, reason: 'payment' });
+    this.actions.push(action);
   }
 }
 
