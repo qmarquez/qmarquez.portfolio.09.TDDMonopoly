@@ -165,7 +165,15 @@ describe('Monopoly', () => {
     expect(game.actions.length).toBe(1);
   });
 
-  test('monopoly should be able to return the last state of the game', () => {
-    expect(game.state).toBeDefined();
+  describe('game state', () => {
+    test('monopoly should be able to return the last state of the game', () => {
+      expect(game.state).toBeDefined();
+    });
+
+    test('should know all the players', () => {
+      const n = game.addPlayer('name');
+      const n2 = game.addPlayer('name2');
+      expect(game.state.players).toEqual([n, n2]);
+    });
   });
 });

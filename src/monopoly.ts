@@ -22,7 +22,12 @@ export class Monopoly {
     return find(this.players, { isBank: true });
   };
   public get state() {
-    return 0;
+    const players = Object
+      .keys(this.players)
+      .map(key => this.players[key]);
+    return {
+      players
+    };
   }
   public hasStarted: boolean | moment.Moment = false;
   public players: { [key: string]: Player } = {};
