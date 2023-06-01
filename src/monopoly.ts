@@ -10,11 +10,11 @@ export class Monopoly {
       super(`${name} is already taken`);
     }
   }
-  public static OrderAlreadyTakenError = class extends Error {
+  public static NotAllowedChoosenOrderError = class extends Error {
     constructor(
       order: number
     ) {
-      super(`order ${order} is already taken`);
+      super(`order ${order} is not allowed`);
     }
   }
 
@@ -75,16 +75,14 @@ export class Monopoly {
     );
   }
 
-  public secureUpdateOrder(player: Player, data: { newOrder: number, inCaseOfCollition?: 'insertAndPush' }) {
-    const { newOrder, inCaseOfCollition } = data;
+  public secureUpdateOrder(player: Player, data: { newOrder: number }) {
+    const { newOrder } = data;
+    if (newOrder > this.lastOrderAdded) {
+      throw new Monopoly.NotAllowedChoosenOrderError(newOrder);
+    }
     const playerInOrder = find(this.players, { order: newOrder });
-    if (playerInOrder && player !== playerInOrder) {
-      if (!inCaseOfCollition) {
-        throw new Monopoly.OrderAlreadyTakenError(newOrder);
-      }
-      this.collitionsStrategies[inCaseOfCollition](player, newOrder);
-    } else {
-      player.order = newOrder;
+    if (player !== playerInOrder) {
+      this.collitionsStrategies['insertAndPush'](player, newOrder);
     }
   }
 

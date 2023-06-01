@@ -79,30 +79,10 @@ describe('Monopoly', () => {
       expect(() => game.secureUpdateOrder(game.players['name'], { newOrder: 1 })).not.toThrow();
     });
 
-    test('the game should thrown an error in case the selected order collide', () => {
+    test('should throw if the new order it\'s grater than the lastOrderAdded', () => {
       game.addPlayer('name');
       game.addPlayer('name2');
-      expect(() => game.secureUpdateOrder(game.players['name'], { newOrder: 2 })).toThrow(Monopoly.OrderAlreadyTakenError);
-    });
-
-    test('the game should not thrown an error in case the selected order collide and inCaseOfCollition was provided', () => {
-      game.addPlayer('name');
-      game.addPlayer('name2');
-      expect(() => game.secureUpdateOrder(game.players['name'], { newOrder: 2, inCaseOfCollition: 'insertAndPush' })).not.toThrow();
-    });
-
-    test('the game should allow to change the order for a player', () => {
-      game.addPlayer('name');
-      game.secureUpdateOrder(game.players['name'], { newOrder: 2 });
-      expect(game.players['name'].order).toBe(2);
-    });
-
-    test('the game should handle a collition: insert and push', () => {
-      game.addPlayer('name');
-      game.addPlayer('name2');
-      game.secureUpdateOrder(game.players['name'], { newOrder: 2, inCaseOfCollition: 'insertAndPush' });
-      expect(game.players['name'].order).toBe(2);
-      expect(game.players['name2'].order).toBe(3);
+      expect(() => game.secureUpdateOrder(game.players['name'], { newOrder: 5 })).toThrow(Monopoly.NotAllowedChoosenOrderError);
     });
 
     test('the game should know who is the next player to play', () => {
@@ -116,7 +96,7 @@ describe('Monopoly', () => {
     });
 
   });
-  
+
   test('hasStarted should only setted on first player adding', () => {
     game.addPlayer('name');
     const hasStarted = game.hasStarted;
