@@ -42,11 +42,17 @@ export class Monopoly {
   }
   private collitionsStrategies = {
     insertAndPush: (player: Player, newOrder: number) => {
+      if (newOrder > player.order) {
         this.playersNames
           .filter(name => this.players[name].order <= newOrder
             && this.players[name].order > player.order)
           .forEach(name => this.players[name].order--);
-        .forEach(name => this.players[name].order++);
+      } else if (newOrder < player.order) {
+        this.playersNames
+          .filter(name => this.players[name].order >= newOrder
+            && this.players[name].order < player.order)
+          .forEach(name => this.players[name].order++);
+      }
       player.order = newOrder;
     }
   }

@@ -93,6 +93,14 @@ describe('Monopoly', () => {
       expect(game.players['name2'].order).toBe(1);
     });
 
+    test('the game should handle a collition: insert and push (to lower position)', () => {
+      game.addPlayer('name');
+      game.addPlayer('name2');
+      game.secureUpdateOrder(game.players['name2'], { newOrder: 1 });
+      expect(game.players['name'].order).toBe(2);
+      expect(game.players['name2'].order).toBe(1);
+    });
+
     test('the game should know who is the next player to play', () => {
       game.addPlayer('name');
       game.addPlayer('name2');
