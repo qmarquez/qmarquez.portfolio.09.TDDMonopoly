@@ -22,9 +22,7 @@ export class Monopoly {
     return find(this.players, { isBank: true });
   };
   public get state() {
-    this.actions
-      .filter(action => !action.executed)
-      .forEach(action => action.exe());
+    this.executeActions();
     const players = Object
       .keys(this.players)
       .map(key => this.players[key]);
@@ -35,7 +33,8 @@ export class Monopoly {
   public hasStarted: boolean | moment.Moment = false;
   public players: { [key: string]: Player } = {};
   private lastOrderAdded = 0;
-  public actions: PaymentAction[] = []
+  public actions: PaymentAction[] = [];
+
   public get playersNames() {
     return Object.keys(this.players)
       .map(key => this.players[key].name);
@@ -106,6 +105,12 @@ export class Monopoly {
   public pay(from: Player, to: Player, data: { amount: number }) {
     const action = new PaymentAction(from, to, { ...data, reason: 'payment' });
     this.actions.push(action);
+  }
+
+  private executeActions() {
+    this.actions
+      .filter(action => !action.executed)
+      .forEach(action => action.exe());
   }
 }
 
