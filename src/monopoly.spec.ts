@@ -85,6 +85,14 @@ describe('Monopoly', () => {
       expect(() => game.secureUpdateOrder(game.players['name'], { newOrder: 5 })).toThrow(Monopoly.NotAllowedChoosenOrderError);
     });
 
+    test('the game should handle the collition: insert and push (to upper position)', () => {
+      game.addPlayer('name');
+      game.addPlayer('name2');
+      game.secureUpdateOrder(game.players['name'], { newOrder: 2 });
+      expect(game.players['name'].order).toBe(2);
+      expect(game.players['name2'].order).toBe(1);
+    });
+
     test('the game should know who is the next player to play', () => {
       game.addPlayer('name');
       game.addPlayer('name2');
