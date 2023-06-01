@@ -74,44 +74,35 @@ describe('Monopoly', () => {
       expect(game.players['name2'].order).toBe(2);
     });
 
-    test('a player can be added in a particular order', () => {
-      game.addPlayer('name', { order: 3 });
-      expect(game.players['name'].order).toBe(3);
-    });
-
-    test('if a player order is already taken, should throw an error', () => {
-      game.addPlayer('name', { order: 3 });
-      expect(() => game.addPlayer('name2', { order: 3 })).toThrow(Monopoly.OrderAlreadyTakenError);
-    });
-
     test('the game shouldn\'t do anything if the newOrder is the same than the current', () => {
-      game.addPlayer('name', { order: 4 });
-      expect(() => game.secureUpdateOrder(game.players['name'], { newOrder: 4 })).not.toThrow();
+      game.addPlayer('name');
+      expect(() => game.secureUpdateOrder(game.players['name'], { newOrder: 1 })).not.toThrow();
     });
 
     test('the game should thrown an error in case the selected order collide', () => {
-      game.addPlayer('name', { order: 4 });
-      game.addPlayer('name2', { order: 5 });
-      expect(() => game.secureUpdateOrder(game.players['name'], { newOrder: 5 })).toThrow(Monopoly.OrderAlreadyTakenError);
+      game.addPlayer('name');
+      game.addPlayer('name2');
+      expect(() => game.secureUpdateOrder(game.players['name'], { newOrder: 2 })).toThrow(Monopoly.OrderAlreadyTakenError);
     });
 
     test('the game should not thrown an error in case the selected order collide and inCaseOfCollition was provided', () => {
-      game.addPlayer('name', { order: 4 });
-      expect(() => game.secureUpdateOrder(game.players['name'], { newOrder: 4, inCaseOfCollition: 'insertAndPush' })).not.toThrow();
+      game.addPlayer('name');
+      game.addPlayer('name2');
+      expect(() => game.secureUpdateOrder(game.players['name'], { newOrder: 2, inCaseOfCollition: 'insertAndPush' })).not.toThrow();
     });
 
     test('the game should allow to change the order for a player', () => {
-      game.addPlayer('name', { order: 4 });
-      game.secureUpdateOrder(game.players['name'], { newOrder: 5 });
-      expect(game.players['name'].order).toBe(5);
+      game.addPlayer('name');
+      game.secureUpdateOrder(game.players['name'], { newOrder: 2 });
+      expect(game.players['name'].order).toBe(2);
     });
 
     test('the game should handle a collition: insert and push', () => {
-      game.addPlayer('name', { order: 4 });
-      game.addPlayer('name2', { order: 5 });
-      game.secureUpdateOrder(game.players['name'], { newOrder: 5, inCaseOfCollition: 'insertAndPush' });
-      expect(game.players['name'].order).toBe(5);
-      expect(game.players['name2'].order).toBe(6);
+      game.addPlayer('name');
+      game.addPlayer('name2');
+      game.secureUpdateOrder(game.players['name'], { newOrder: 2, inCaseOfCollition: 'insertAndPush' });
+      expect(game.players['name'].order).toBe(2);
+      expect(game.players['name2'].order).toBe(3);
     });
 
     test('the game should know who is the next player to play', () => {
@@ -123,24 +114,9 @@ describe('Monopoly', () => {
     test('should allow to finish the current player turn', () => {
       expect(game.nextTurn).toBeDefined();
     });
-    });
 
-    test('the last added order pointer should work on edge cases', () => {
-      game.addPlayer('name', { order: 1 });
-      game.addPlayer('name2');
-      game.addPlayer('name4', { order: 4 });
-      game.addPlayer('name5');
-      game.addPlayer('name3', { order: 3 });
-      game.addPlayer('name6');
-      expect(game.players['name'].order).toBe(1);
-      expect(game.players['name2'].order).toBe(2);
-      expect(game.players['name4'].order).toBe(4);
-      expect(game.players['name5'].order).toBe(5);
-      expect(game.players['name3'].order).toBe(3);
-      expect(game.players['name6'].order).toBe(6);
-    });
   });
-
+  
   test('hasStarted should only setted on first player adding', () => {
     game.addPlayer('name');
     const hasStarted = game.hasStarted;
@@ -148,11 +124,9 @@ describe('Monopoly', () => {
     expect(game.hasStarted).toBe(hasStarted);
   });
 
-  describe('addPlayer - setMoney', () => {
-    test('a player could be created with a custom amount of money', () => {
-      const player = game.addPlayer('name', { money: 1000 });
-      expect(player.money).toBe(1000);
-    });
+  test('a player could be created with a custom amount of money', () => {
+    const player = game.addPlayer('name', { money: 1000 });
+    expect(player.money).toBe(1000);
   });
 
   test('game should allow to pay', () => {

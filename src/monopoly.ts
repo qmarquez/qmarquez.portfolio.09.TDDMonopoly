@@ -49,16 +49,11 @@ export class Monopoly {
     }
   }
 
-  public addPlayer(name: string, data: { order?: number, money?: number } = {}) {
-    const { order } = data
+  public addPlayer(name: string, data: { money?: number } = {}) {
     if (this.players[name]) {
       throw new Monopoly.NameAlreadyTakenError(name);
     }
-    if (order && find(this.players, { order })) {
-      throw new Monopoly.OrderAlreadyTakenError(order);
-    }
     this.createPlayer(name, data);
-    this.checklastOrdedAddedPointer();
     this.setHasStarted();
     return this.players[name];
   }
@@ -69,21 +64,15 @@ export class Monopoly {
     }
   }
 
-  private createPlayer(name: string, { order, money }: { order?: number, money?: number }) {
+  private createPlayer(name: string, { money }: { money?: number }) {
     this.players[name] = new Player(
       name,
       {
         isBank: !this.hasStarted,
-        order: order ? (this.lastOrderAdded = order) : ++this.lastOrderAdded,
+        order: ++this.lastOrderAdded,
         money
       }
     );
-  }
-
-  private checklastOrdedAddedPointer() {
-    while (find(this.players, { order: this.lastOrderAdded + 1 })) {
-      this.lastOrderAdded++;
-    }
   }
 
   public secureUpdateOrder(player: Player, data: { newOrder: number, inCaseOfCollition?: 'insertAndPush' }) {
