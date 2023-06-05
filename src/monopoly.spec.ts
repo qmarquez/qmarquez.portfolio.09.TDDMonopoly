@@ -143,17 +143,6 @@ describe('Monopoly', () => {
     expect(game.pay).toBeDefined();
   });
 
-  test('game should have a history of actions', () => {
-    expect(game.actions).toBeDefined();
-  });
-
-  test('when a pay is made action should be added to the history', () => {
-    const from = game.addPlayer('from');
-    const to = game.addPlayer('to');
-    game.pay(from, to, { amount: 100 });
-    expect(game.actions.length).toBe(1);
-  });
-
   describe('game state', () => {
     test('monopoly should be able to return the last state of the game', () => {
       expect(game.state).toBeDefined();
@@ -177,6 +166,17 @@ describe('Monopoly', () => {
     test('should have the next player to play', () => {
       const n = game.addPlayer('name');
       expect(game.state.nextPlayer).toEqual(n);
+    });
+
+    test('game should have a history of actions', () => {
+      expect(game.state.actionsHistory).toBeDefined();
+    });
+  
+    test('when a pay is made action should be added to the history', () => {
+      const from = game.addPlayer('from');
+      const to = game.addPlayer('to');
+      game.pay(from, to, { amount: 100 });
+      expect(game.state.actionsHistory.length).toBe(1);
     });
   });
 });

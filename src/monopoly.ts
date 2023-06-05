@@ -29,13 +29,14 @@ export class Monopoly {
     return {
       players,
       nextPlayer: this.nextPlayer,
+      actionsHistory: this.actions,
     };
   }
   public hasStarted: boolean | moment.Moment = false;
   public players: { [key: string]: Player } = {};
   private lastOrderAdded = 0;
   private currentOrder = 0;
-  public actions: PaymentAction[] = [];
+  private actions: PaymentAction[] = [];
 
   public get playersNames() {
     return Object.keys(this.players)
