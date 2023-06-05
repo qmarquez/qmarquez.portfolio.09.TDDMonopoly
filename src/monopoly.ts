@@ -20,7 +20,7 @@ export class Monopoly {
 
   public get bank() {
     return find(this.players, { isBank: true });
-  };
+  }
   public get state() {
     this.executeActions();
     const players = Object
@@ -34,7 +34,7 @@ export class Monopoly {
   public hasStarted: boolean | moment.Moment = false;
   public players: { [key: string]: Player } = {};
   private lastOrderAdded = 0;
-  private currentOrder: number = 0;
+  private currentOrder = 0;
   public actions: PaymentAction[] = [];
 
   public get playersNames() {

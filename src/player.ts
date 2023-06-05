@@ -17,9 +17,8 @@ export class Player {
   private _money: number;
   public get money() {
     return this._money;
-  };
-  public set money(_: number) { }
-  public order: number = 0;
+  }
+  public order = 0;
 
   constructor(
     public name: string,
@@ -48,6 +47,6 @@ export class Player {
       throw new Player.PaymenAsBankNotAllowedError(this.name);
   }
 
-  public aproveTransaction() {
-  }
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  public aproveTransaction() { }
 }
